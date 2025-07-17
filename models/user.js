@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
-const validator = required('validator');
-const {type} = require("os");
 const { required } = require("nodemon/lib/config");
+
 
 const userSchema = new Schema({
     username: {
         type: String,
         unique: true,
+        trim: true,
         required: [true, 'Please enter your username']
     },
     email: {
@@ -17,7 +17,8 @@ const userSchema = new Schema({
         unique: true,
         required: [true, 'Please enter email'],
         lowercase: true,
-        validate: [ validator.isEmail, 'Please enter a valid email.']
+        trim: true,
+        match: [ /^\S+@\S+\.\S+$/, 'Please enter a valid email.']
     },
     password: {
         type: String,
@@ -27,10 +28,19 @@ const userSchema = new Schema({
     },
     role: {
         type: String,
-        enum: ["admin", "manager", "member", "viewer"],
-        default: 'viewer',
+        enum: ["admin", "manager", "staff"],
+        default: 'staff',
         required: true
-    }
-})
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+    lastLogin: {
+        type: Date,
+  },
+});
+
+userSchema.index ({ email: 1});
 
 module.exports = mongoose.model('User', userSchema);
