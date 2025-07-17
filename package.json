@@ -1,0 +1,22 @@
+{
+  "name": "task-management",
+  "version": "1.0.0",
+  "description": "A real-time collaborative task management tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run dev"
+  },
+  "keywords": [
+    "Task",
+    "management"
+  ],
+  "author": "Drene",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "express.js": "^1.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.16.4",
+    "socket.io": "^4.8.1"
+  }
+}
