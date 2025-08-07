@@ -7,4 +7,6 @@ const userController = require('../controller/user')
 router.route('/signup').post(userController.register);
 router.route('/login').post(userController.userLogin);
 router.route('/listUsers').get(authMiddleware.verifyAuth, authMiddleware.verifyRole(['admin', 'manager']), userController.getAllUsers)
-router.route('/updateUserRole').put(authMiddleware.verifyAuth, authMiddleware.verifyRole(['admin', 'manager']), userController.updateUserrole);
+router.route('/updateUserRole/:id').put(authMiddleware.verifyAuth, authMiddleware.verifyRole(['admin', 'manager']), userController.updateUserrole);
+
+module.exports = router;

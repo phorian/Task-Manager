@@ -19,7 +19,7 @@ exports.verifyAuth = async (req, res, next) => {
         //next()
         }
 
-        req.user = user
+        req.user = {user, username: decodedToken.username};
         next();
     } catch(err){
         return res.status(401).json("Invalid token");
